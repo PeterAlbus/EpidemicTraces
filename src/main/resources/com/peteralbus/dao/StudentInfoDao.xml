@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peteralbus.dao.StudentInfoDao">
+    <insert id="ClockIn" parameterType="com.peteralbus.domain.ClockInInfo">
+        <selectKey resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into epidemic.clock_in(stu_id, stu_name, stu_address, stu_class, stu_tmp, is_out, stu_des, stu_out, stu_back, clock_date) VALUES (#{stu_id},#{stu_name},#{stu_address},#{stu_class},#{stu_tmp},#{is_out},#{stu_des},#{stu_out},#{stu_back},#{clock_date})
+    </insert>
+    <select id="findAll" resultType="ClockInInfo">
+        select * from epidemic.clock_in
+    </select>
+</mapper>

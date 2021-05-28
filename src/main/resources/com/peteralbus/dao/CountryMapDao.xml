@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peteralbus.dao.CountryMapDao">
+    <select id="findChinaMap" resultType="CountryMap">
+        select * from epidemic.chinamap
+    </select>
+    <select id="findUSAMap" resultType="CountryMap">
+        select * from epidemic.usa_map
+    </select>
+    <update id="updateChinaMap" parameterType="com.peteralbus.domain.CountryMap">
+        update epidemic.chinamap set count=#{count} WHERE city=#{city}
+    </update>
+    <update id="updateUSAMap" parameterType="com.peteralbus.domain.CountryMap">
+        update epidemic.usa_map set count=#{count} WHERE city=#{city}
+    </update>
+</mapper>
