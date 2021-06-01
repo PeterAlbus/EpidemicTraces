@@ -26,6 +26,7 @@ public class InfoCollectController
     @RequestMapping("/clock_in")
     public ModelAndView ClockIn(HttpServletRequest request, HttpServletResponse response)
     {
+        String stu_school=request.getParameter("stu_school");
         int stu_id= Integer.parseInt(request.getParameter("stu_id"));
         String stu_name=request.getParameter("stu_name");
         String stu_address=request.getParameter("stu_address");
@@ -38,9 +39,8 @@ public class InfoCollectController
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat( " yyyy-MM-dd" );
         String nowTime = sdf.format(date);
-        ClockInInfo clockInInfo=new ClockInInfo(stu_id,stu_name,stu_address,stu_class,stu_tmp,is_out,stu_des,stu_out,stu_back,nowTime);
+        ClockInInfo clockInInfo=new ClockInInfo(stu_school,stu_id,stu_name,stu_address,stu_class,stu_tmp,is_out,stu_des,stu_out,stu_back,nowTime);
         int id=infoCollectService.ClockIn(clockInInfo);
-        System.out.println(id);
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("clock_in",clockInInfo);
         modelAndView.setViewName("/pages/info_collection/success.jsp");

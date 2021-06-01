@@ -44,6 +44,10 @@
         <div class="container">
             <form role="form" action="${pageContext.request.contextPath}/clock_in" method="post">
                 <div class="row">
+                    <div class="form-group text-left col-sm-12 col-md-12">
+                        <label for="stu_school">学校</label>
+                        <input type="text" class="form-control" id="stu_school" name="stu_school" placeholder="请输入所在学校">
+                    </div>
                     <div class="form-group text-left col-sm-12 col-md-4">
                         <label for="stu_id">学号</label>
                         <input type="text" class="form-control" id="stu_id" name="stu_id" placeholder="请输入学号">
@@ -54,7 +58,9 @@
                     </div>
                     <div class="form-group text-left col-sm-12 col-md-4">
                         <label for="stu_class">班级</label>
-                        <select id="stu_class" class="form-control" name="stu_class">
+                        <select class="form-control" id="spec_num1" name="spec_num1"
+                                onchange="document.getElementById('stu_class').value=$('#spec_num1 option:selected').text()">
+                            <option>可从本下拉菜单选择</option>
                             <option>19计科1</option>
                             <option>19计科2</option>
                             <option>19计科3</option>
@@ -62,6 +68,7 @@
                             <option>18计科2</option>
                             <option>18计科3</option>
                         </select>
+                        <input type="text" class="form-control selectInput" id="stu_class" name="stu_class" placeholder="请选择"/>
                     </div>
                 </div>
                 <div class="form-group text-left selectInput">

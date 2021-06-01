@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class ClockInInfo
 {
+    String stu_school;
     int clock_id;
     int stu_id;
     String stu_name;
@@ -16,8 +17,24 @@ public class ClockInInfo
     String stu_back;
     String clock_date;
 
-    public ClockInInfo(int stu_id, String stu_name, String stu_address, String stu_class, double stu_tmp, boolean is_out, String stu_des, String stu_out, String stu_back, String clock_date) {
-        clock_id=0;
+    public String getStu_school() {
+        return stu_school;
+    }
+
+    public void setStu_school(String stu_school) {
+        this.stu_school = stu_school;
+    }
+
+    public int getClock_id() {
+        return clock_id;
+    }
+
+    public void setClock_id(int clock_id) {
+        this.clock_id = clock_id;
+    }
+
+    public ClockInInfo(String stu_school, int stu_id, String stu_name, String stu_address, String stu_class, double stu_tmp, boolean is_out, String stu_des, String stu_out, String stu_back, String clock_date) {
+        this.stu_school = stu_school;
         this.stu_id = stu_id;
         this.stu_name = stu_name;
         this.stu_address = stu_address;
@@ -30,8 +47,9 @@ public class ClockInInfo
         this.clock_date = clock_date;
     }
 
-    public ClockInInfo(int clock_id,int stu_id, String stu_name, String stu_address, String stu_class, double stu_tmp, boolean is_out, String stu_des, String stu_out, String stu_back, Date clock_date) {
-        this.clock_id=clock_id;
+    public ClockInInfo( int clock_id,String stu_school, int stu_id, String stu_name, String stu_address, String stu_class, double stu_tmp, boolean is_out, String stu_des, String stu_out, String stu_back, Date clock_date) {
+        this.stu_school = stu_school;
+        this.clock_id = clock_id;
         this.stu_id = stu_id;
         this.stu_name = stu_name;
         this.stu_address = stu_address;
@@ -122,5 +140,23 @@ public class ClockInInfo
 
     public void setStu_back(String stu_back) {
         this.stu_back = stu_back;
+    }
+
+    @Override
+    public String toString() {
+        return "ClockInInfo{" +
+                "stu_school='" + stu_school + '\'' +
+                ", clock_id=" + clock_id +
+                ", stu_id=" + stu_id +
+                ", stu_name='" + stu_name + '\'' +
+                ", stu_address='" + stu_address + '\'' +
+                ", stu_class='" + stu_class + '\'' +
+                ", stu_tmp=" + stu_tmp +
+                ", is_out=" + is_out +
+                ", stu_des='" + stu_des + '\'' +
+                ", stu_out='" + stu_out + '\'' +
+                ", stu_back='" + stu_back + '\'' +
+                ", clock_date='" + clock_date + '\'' +
+                '}';
     }
 }
