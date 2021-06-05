@@ -47,6 +47,7 @@
             <a href="#predict" class="list-group-item list-group-item-action bg-light">全球确诊人数预测</a>
             <a href="${pageContext.request.contextPath}/ChinaConfirmPredict" class="list-group-item list-group-item-action bg-light">中国确诊人数预测</a>
             <a href="${pageContext.request.contextPath}/USAConfirmPredict" class="list-group-item list-group-item-action bg-light">美国确诊人数预测</a>
+            <a href="${pageContext.request.contextPath}/IndRNNPredict" class="list-group-item list-group-item-action bg-light">IndRNN模型展示</a>
         </div>
     </div>
     <div id="page-content-wrapper">

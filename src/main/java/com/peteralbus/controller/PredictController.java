@@ -50,4 +50,13 @@ public class PredictController
         modelAndView.setViewName("/pages/predict/usa_confirmed.jsp");
         return modelAndView;
     }
+    @RequestMapping("/IndRNNPredict")
+    public ModelAndView IndRNNPredict()
+    {
+        List<Predict> predictList=predictService.findAll();
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("predictList",predictList);
+        modelAndView.setViewName("/pages/predict/IndRNN.jsp");
+        return modelAndView;
+    }
 }
