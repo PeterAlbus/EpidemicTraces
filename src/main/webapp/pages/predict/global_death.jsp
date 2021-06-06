@@ -105,7 +105,7 @@
             trigger: 'axis'
         },
         legend: {
-            data: ['确诊人数', '3*LSTM','Bi-LSTM'],
+            data: ['死亡人数', '3*LSTM','Bi-LSTM'],
             selected:{
                 '3*LSTM':false,
                 'Bi-LSTM':false,

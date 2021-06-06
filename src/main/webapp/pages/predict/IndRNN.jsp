@@ -1,9 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: wuhon
-  Date: 2021/3/20
-  Time: 0:45
-  To change this template use File | Settings | File Templates.
+  User: PeterAlbus
+  Date: 2021/6/5
+  Time: 22:58
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>中国疫情预测</title>
+    <title>IndRNN模型</title>
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
@@ -45,9 +44,9 @@
         <div class="list-group list-group-flush">
             <a href="${pageContext.request.contextPath}/GlobalDeathPredict" class="list-group-item list-group-item-action bg-light">全球死亡人数预测</a>
             <a href="${pageContext.request.contextPath}/GlobalConfirmPredict" class="list-group-item list-group-item-action bg-light">全球确诊人数预测</a>
-            <a href="#predict" class="list-group-item list-group-item-action bg-light">中国确诊人数预测</a>
+            <a href="${pageContext.request.contextPath}/ChinaConfirmPredict" class="list-group-item list-group-item-action bg-light">中国确诊人数预测</a>
             <a href="${pageContext.request.contextPath}/USAConfirmPredict" class="list-group-item list-group-item-action bg-light">美国确诊人数预测</a>
-            <a href="${pageContext.request.contextPath}/IndRNNPredict" class="list-group-item list-group-item-action bg-light">IndRNN模型展示</a>
+            <a href="#predict" class="list-group-item list-group-item-action bg-light">IndRNN模型展示</a>
         </div>
     </div>
     <div id="page-content-wrapper">
@@ -56,7 +55,7 @@
         </div>
         <section class="page-section" id="predict">
             <div class="container" style="text-align: center">
-                <h2 class="text-center mt-0">中国确诊人数预测</h2>
+                <h2 class="text-center mt-0">IndRNN模型-世界确诊人数</h2>
                 <hr class="divider my-4" />
                 <div class="box"></div>
             </div>
@@ -69,33 +68,30 @@
     var date=[];
     var a=[];
     var predict=[];
-    var adjust=[];
     <c:forEach items="${predictList}" var="predict">
-        date.push('${predict.getDate()}');
-    <c:choose>
-    <c:when test="${predict.getChina_confirm()==0}">
-        a.push('');
-    </c:when>
-    <c:otherwise>
-        a.push(${predict.getChina_confirm()});
-    </c:otherwise>
-    </c:choose>
-    <c:choose>
-    <c:when test="${predict.getChina_confirm_predict()==0}">
-    predict.push('');
-    </c:when>
-    <c:otherwise>
-    predict.push(${predict.getChina_confirm_predict()});
-    </c:otherwise>
-    </c:choose>
-    <c:choose>
-    <c:when test="${predict.getChina_confirm_adjust()==0}">
-    adjust.push('');
-    </c:when>
-    <c:otherwise>
-    adjust.push(${predict.getChina_confirm_adjust()});
-    </c:otherwise>
-    </c:choose>
+        <c:choose>
+            <c:when test="${predict.getSh_confirm()==0&&predict.getSh_confirm_predict()==0}">
+            </c:when>
+            <c:otherwise>
+                date.push('${predict.getDate()}');
+            </c:otherwise>
+        </c:choose>
+        <c:choose>
+            <c:when test="${predict.getSh_confirm()==0&&predict.getSh_confirm_predict()!=0}">
+                a.push('');
+            </c:when>
+            <c:when test="${predict.getSh_confirm()!=0}">
+                a.push(${predict.getSh_confirm()});
+            </c:when>
+        </c:choose>
+        <c:choose>
+            <c:when test="${predict.getSh_confirm_predict()==0&&predict.getSh_confirm()!=0}">
+                predict.push('');
+            </c:when>
+            <c:when test="${predict.getSh_confirm_predict()!=0}">
+                predict.push(${predict.getSh_confirm_predict()});
+            </c:when>
+        </c:choose>
     </c:forEach>
     option = {
         title: {
@@ -105,7 +101,7 @@
             trigger: 'axis'
         },
         legend: {
-            data: ['确诊人数', '3*LSTM','Bi-LSTM'],
+            data: ['确诊人数', '预测人数'],
             selected:{
                 '3*LSTM':false,
                 'Bi-LSTM':false,
@@ -138,7 +134,7 @@
                 data: a
             },
             {
-                name: '3*LSTM',
+                name: '预测人数',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -150,21 +146,7 @@
                     }
                 },
                 data: predict
-            },
-            {
-                name: 'Bi-LSTM',
-                type: 'line',
-                stack: '3',
-                itemStyle: {
-                    normal: {
-                        color: "#6c58db",//折线点的颜色
-                        lineStyle: {
-                            color: "#5869db"//折线的颜色
-                        }
-                    }
-                },
-                data: adjust
-            },
+            }
         ]
     };
     myChart.setOption(option);
@@ -178,4 +160,3 @@
     <div class="container"><div class="small text-center text-muted">Copyright © 2021 - PeterAlbus&LJH</div></div>
 </footer>
 </body>
-</html>

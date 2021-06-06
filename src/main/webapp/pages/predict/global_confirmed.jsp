@@ -99,7 +99,7 @@
     </c:forEach>
     option = {
         title: {
-            text: '死亡数据'
+            text: '确诊人数'
         },
         tooltip: {
             trigger: 'axis'
