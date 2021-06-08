@@ -1,6 +1,8 @@
 package com.peteralbus.controller;
 
+import com.peteralbus.domain.IndRNN;
 import com.peteralbus.domain.Predict;
+import com.peteralbus.service.IndRNNService;
 import com.peteralbus.service.PredictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ public class PredictController
 {
     @Autowired
     private PredictService predictService;
+    @Autowired
+    private IndRNNService indRNNService;
     @RequestMapping("/GlobalDeathPredict")
     public ModelAndView GlobalDeathPredict()
     {
@@ -53,7 +57,7 @@ public class PredictController
     @RequestMapping("/IndRNNPredict")
     public ModelAndView IndRNNPredict()
     {
-        List<Predict> predictList=predictService.findAll();
+        List<IndRNN> predictList=indRNNService.findAll();
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("predictList",predictList);
         modelAndView.setViewName("/pages/predict/IndRNN.jsp");

@@ -30,7 +30,7 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/InfoCollection">打卡</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/china_daily">图表展示</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chinamap">地图展示</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">疫情状况预测</a></li>
+                <li class="nav-item"><a class   ="nav-link js-scroll-trigger" href="#">疫情状况预测</a></li>
             </ul>
         </div>
     </div>
@@ -39,28 +39,13 @@
     <h1 class="text-center text-white font-weight-bold" style="width: 100%;position: absolute;top:200px">疫情状况预测</h1>
 </div>
 <div class="d-flex container-fluid toggled" id="wrapper">
-    <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">切换数据</div>
-        <div class="list-group list-group-flush">
-            <a href="${pageContext.request.contextPath}/GlobalDeathPredict" class="list-group-item list-group-item-action bg-light">全球死亡人数预测</a>
-            <a href="${pageContext.request.contextPath}/GlobalConfirmPredict" class="list-group-item list-group-item-action bg-light">全球确诊人数预测</a>
-            <a href="${pageContext.request.contextPath}/ChinaConfirmPredict" class="list-group-item list-group-item-action bg-light">中国确诊人数预测</a>
-            <a href="${pageContext.request.contextPath}/USAConfirmPredict" class="list-group-item list-group-item-action bg-light">美国确诊人数预测</a>
-            <a href="#predict" class="list-group-item list-group-item-action bg-light">IndRNN模型展示</a>
+    <section class="page-section" id="predict">
+        <div class="container" style="text-align: center">
+            <h2 class="text-center mt-0">IndRNN模型-世界确诊人数</h2>
+            <hr class="divider my-4" />
+            <div class="box"></div>
         </div>
-    </div>
-    <div id="page-content-wrapper">
-        <div class="hide-button">
-            <button class="btn btn-light" id="menu-toggle">查看其他数据</button>
-        </div>
-        <section class="page-section" id="predict">
-            <div class="container" style="text-align: center">
-                <h2 class="text-center mt-0">IndRNN模型-世界确诊人数</h2>
-                <hr class="divider my-4" />
-                <div class="box"></div>
-            </div>
-        </section>
-    </div>
+    </section>
 </div>
 <script>
     var myChart=echarts.init(document.querySelector(".box"));
@@ -77,19 +62,19 @@
             </c:otherwise>
         </c:choose>
         <c:choose>
-            <c:when test="${predict.getSh_confirm()==0&&predict.getSh_confirm_predict()!=0}">
+            <c:when test="${predict.getBrazil()==0&&predict.getBrazil_Predict()!=0}">
                 a.push('');
             </c:when>
-            <c:when test="${predict.getSh_confirm()!=0}">
-                a.push(${predict.getSh_confirm()});
+            <c:when test="${predict.getBrazil()!=0}">
+                a.push(${predict.getBrazil()});
             </c:when>
         </c:choose>
         <c:choose>
-            <c:when test="${predict.getSh_confirm_predict()==0&&predict.getSh_confirm()!=0}">
+            <c:when test="${predict.getBrazil_Predict()==0&&predict.getBrazil()!=0}">
                 predict.push('');
             </c:when>
-            <c:when test="${predict.getSh_confirm_predict()!=0}">
-                predict.push(${predict.getSh_confirm_predict()});
+            <c:when test="${predict.getBrazil_Predict()!=0}">
+                predict.push(${predict.getBrazil_Predict()});
             </c:when>
         </c:choose>
     </c:forEach>
