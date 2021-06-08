@@ -63,7 +63,7 @@
 })(jQuery); // End of use strict
 
 window.onresize = function(){
-  myChart.resize();
+  myChart_Brazil.resize();
   myChart2.resize();
 }
 
