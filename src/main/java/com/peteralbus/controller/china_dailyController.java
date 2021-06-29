@@ -19,7 +19,7 @@ public class china_dailyController
     public ModelAndView findAll() throws ParseException
     {
         List<ChinaDaily> chinaDailyList;
-        chinaDailyList =chinaDailyService.getfromJson();
+        chinaDailyList=chinaDailyService.getfromJson();
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("chinalist", chinaDailyList);
         modelAndView.setViewName("/pages/time_series/china_daily.jsp");

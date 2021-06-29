@@ -44,25 +44,31 @@
         <div class="container" style="text-align: center">
             <h2 class="text-center mt-0">IndRNN模型</h2>
             <hr class="divider my-4" />
-            <div class="box" id="box_brazil"></div>
             <div class="box" id="box_china"></div>
-            <div class="box" id="box_france"></div>
-            <div class="box" id="box_global"></div>
-            <div class="box" id="box_india"></div>
-            <div class="box" id="box_russia"></div>
+            <br><br><br>
             <div class="box" id="box_us"></div>
+            <br><br><br>
+            <div class="box" id="box_india"></div>
+            <br><br><br>
+            <div class="box" id="box_brazil"></div>
+            <br><br><br>
+            <div class="box" id="box_france"></div>
+            <br><br><br>
+            <div class="box" id="box_global"></div>
+            <br><br><br>
+            <div class="box" id="box_russia"></div>
         </div>
     </section>
     </div>
 </div>
 <script>
-    var myChart_Brazil=echarts.init(document.querySelector("#box_brazil"));
     var myChart_China=echarts.init(document.querySelector("#box_china"));
+    var myChart_us=echarts.init(document.querySelector("#box_us"));
+    var myChart_india=echarts.init(document.querySelector("#box_india"));
+    var myChart_Brazil=echarts.init(document.querySelector("#box_brazil"));
     var myChart_france=echarts.init(document.querySelector("#box_france"));
     var myChart_global=echarts.init(document.querySelector("#box_global"));
-    var myChart_india=echarts.init(document.querySelector("#box_india"));
     var myChart_russia=echarts.init(document.querySelector("#box_russia"));
-    var myChart_us=echarts.init(document.querySelector("#box_us"));
     var option_brazil,option_china,option_france,option_global,option_india,option_russia,option_us;
     var date=[];
     var Brazil_origin=[],Brazil_predict=[],Brazil_death_origin=[],Brazil_death_predict=[];
