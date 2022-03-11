@@ -157,9 +157,9 @@
                 stack: '3',
                 itemStyle: {
                     normal: {
-                        color: "#6c58db",//折线点的颜色
+                        color: "#fadb14",//折线点的颜色
                         lineStyle: {
-                            color: "#5869db"//折线的颜色
+                            color: "#fadb14"//折线的颜色
                         }
                     }
                 },

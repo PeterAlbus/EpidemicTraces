@@ -10,7 +10,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>IndRNN模型</title>
+    <title>Fine-tuned IndRNN model</title>
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
@@ -22,27 +22,27 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 navbar-scrolled" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/index">疫迹</a>
+        <a class="navbar-brand js-scroll-trigger" href="${pageContext.request.contextPath}/index">Epidemic Traces</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/index#news">要闻</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/InfoCollection">打卡</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/china_daily">图表展示</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chinamap">地图展示</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">疫情状况预测</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/index#news">News</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/InfoCollection">Clock in</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/china_daily">Chart</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/chinamap">Map</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#">Prediction</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="page-banner">
-    <h1 class="text-center text-white font-weight-bold" style="width: 100%;position: absolute;top:200px">疫情状况预测</h1>
+    <h1 class="text-center text-white font-weight-bold" style="width: 100%;position: absolute;top:200px">The prediction of COVID-19 epidemic situation</h1>
 </div>
 <div class="d-flex container-fluid toggled" id="wrapper">
     <div id="page-content-wrapper">
     <section class="page-section" id="predict">
         <div class="container" style="text-align: center">
-            <h2 class="text-center mt-0">IndRNN模型</h2>
+            <h2 class="text-center mt-0">Fine-tuned IndRNN model</h2>
             <hr class="divider my-4" />
             <div class="box" id="box_china"></div>
             <br><br><br>
@@ -54,9 +54,9 @@
             <br><br><br>
             <div class="box" id="box_france"></div>
             <br><br><br>
-            <div class="box" id="box_global"></div>
-            <br><br><br>
             <div class="box" id="box_russia"></div>
+            <br><br><br>
+            <div class="box" id="box_global"></div>
         </div>
     </section>
     </div>
@@ -231,18 +231,25 @@
     </c:forEach>
     option_brazil = {
         title: {
-            text: '巴西疫情状况'
+            text: 'Brazil'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -264,13 +271,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: Brazil_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -284,7 +291,7 @@
                 data: Brazil_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -298,7 +305,7 @@
                 data: Brazil_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
@@ -316,18 +323,25 @@
     myChart_Brazil.setOption(option_brazil);
     option_china = {
         title: {
-            text: '中国疫情状况'
+            text: 'China'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -349,13 +363,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: China_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -369,7 +383,7 @@
                 data: China_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -383,7 +397,7 @@
                 data: China_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
@@ -401,18 +415,25 @@
     myChart_China.setOption(option_china);
     option_france = {
         title: {
-            text: '法国疫情状况'
+            text: 'France'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -434,13 +455,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: France_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -454,7 +475,7 @@
                 data: France_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -468,7 +489,7 @@
                 data: France_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
@@ -486,18 +507,25 @@
     myChart_france.setOption(option_france);
     option_global = {
         title: {
-            text: '世界疫情状况'
+            text: 'World'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -519,13 +547,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: Global_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -539,7 +567,7 @@
                 data: Global_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -553,7 +581,7 @@
                 data: Global_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
@@ -571,18 +599,25 @@
     myChart_global.setOption(option_global);
     option_india = {
         title: {
-            text: '印度疫情状况'
+            text: 'India'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -604,13 +639,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: India_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -624,7 +659,7 @@
                 data: India_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -638,7 +673,7 @@
                 data: India_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
@@ -656,18 +691,25 @@
     myChart_india.setOption(option_india);
     option_russia = {
         title: {
-            text: '俄罗斯疫情状况'
+            text: 'Russia'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -689,13 +731,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: Russia_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -709,7 +751,7 @@
                 data: Russia_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -723,7 +765,7 @@
                 data: Russia_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
@@ -741,18 +783,25 @@
     myChart_russia.setOption(option_russia);
     option_us = {
         title: {
-            text: '美国疫情状况'
+            text: 'the United Stated'
         },
         tooltip: {
             trigger: 'axis'
         },
-        legend: {
-            data: ['确诊人数', '预测确诊人数','死亡人数','预测死亡人数'],
-            selected:{
-                '死亡人数':false,
-                '预测死亡人数':false,
+        legend: [
+            {
+                top: '20',
+                data: ['Cumulative confirmed cases', 'Predicted cumulative confirmed cases'],
+            },
+            {
+                top: '40',
+                data: ['Cumulative death cases','Predicted cumulative death cases'],
+                selected:{
+                    'Cumulative death cases':false,
+                    'Predicted cumulative death cases':false,
+                }
             }
-        },
+        ],
         grid: {
             left: '3%',
             right: '4%',
@@ -774,13 +823,13 @@
         },
         series: [
             {
-                name: '确诊人数',
+                name: 'Cumulative confirmed cases',
                 type: 'line',
                 stack: '1',
                 data: US_origin
             },
             {
-                name: '预测确诊人数',
+                name: 'Predicted cumulative confirmed cases',
                 type: 'line',
                 stack: '2',
                 itemStyle: {
@@ -794,7 +843,7 @@
                 data: US_predict
             },
             {
-                name: '死亡人数',
+                name: 'Cumulative death cases',
                 type: 'line',
                 stack: '3',
                 itemStyle: {
@@ -808,7 +857,7 @@
                 data: US_death_origin
             },
             {
-                name: '预测死亡人数',
+                name: 'Predicted cumulative death cases',
                 type: 'line',
                 stack: '4',
                 itemStyle: {
